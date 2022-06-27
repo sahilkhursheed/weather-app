@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://kit.fontawesome.com/e8068839b3.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/5.1.3/darkly/bootstrap.min.css" integrity="sha512-ZdxIsDOtKj2Xmr/av3D/uo1g15yxNFjkhrcfLooZV5fW0TT7aF7Z3wY1LOA16h0VgFLwteg14lWqlYUQK3to/w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <title>Weather App </title>
+</head>
+<body>
+  <div class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <img src="{% static 'images/icon.png' %}" class="image">
+      <a href="../" class="navbar-brand">Weather App</a>
+      <a href="{% url 'home' %}" class="navbar-tech">Home</a>
+    </div>
+  </div>
+  <div id="jumbotron" class="jumbotron" style="text-align: center; margin-top:10px">
+    <img src="{% static 'images/Weather.webp' %}" class="image" style="width:20%; margin-bottom:10px;">
+  </div>
+<center>
+<div class="main-ig">
+    <form method="post" class="col-md">
+      {% csrf_token %}
+      <div class=" input-group">
+        <input type="text" class="form-control" name="city" placeholder="Choose Your City ...">
+      <div class="input-group-btn">
+        <button type="submit" class="btn" style="background-color:#0d6efd;">Search<i class="fas fa-search"></i></button>
+      </div>
+      </div>
+    <form>
+</div>
+</center>
+  <br> <br>
+  <div class="row">
+    {% if country_code and coordinate and temp and pressure and humidity %}
+    <div class="col d-sm-flex justify-content-center">
+      <div class="card text-white bg-light mb-3">
+      <div class="card-body">
+        <h5><span class="badge rounded-pill bg-primary">Country Code :</span> {{country_code}}</h5>
+        <h5><span class="badge rounded-pill bg-primary">Coordinates [X,Y] :</span> {{coordinate}}</h5>
+        <h5><span class="badge rounded-pill bg-primary">Temperature in Celsius :</span> {{temp}}</h5>
+        <h5><span class="badge rounded-pill bg-primary">Pressure :</span> {{pressure}} </h5>
+        <h5><span class="badge rounded-pill bg-primary">Humidity : </span> {{humidity}}</h5>
+        <h5><span class="badge rounded-pill bg-primary">Forecast : </span> {{main}} <img src="http://openweathermap.org/img/w/{{icon}}.png" alt="Image" style="width:70px"></h5>
+        <h5><span class="badge rounded-pill bg-primary">Description : </span> {{description}}</h5>
+      </div>
+      {% endif %}
+    </div>
+</body>
+</html>
